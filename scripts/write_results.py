@@ -35,7 +35,9 @@ lines += [
     "| --- | ---: | ---: | ---: |",
 ]
 for row in report["sequence"]:
-    lines.append(f"| {row['model']} | {row['rmse']:.2f} | {row['mae']:.2f} | {row['nasa_score']:.1f} |")
+    lines.append(
+        f"| {row['model']} | {row['rmse']:.2f} | {row['mae']:.2f} | {row['nasa_score']:.1f} |"
+    )
 lines += [
     "",
     f"10-90 interval coverage on the FD001 exam: {report['interval_coverage_10_90']:.3f}",
@@ -48,7 +50,9 @@ lines += [
 for row in report["classical"]:
     if row["subset"] == "FD001":
         continue
-    lines.append(f"| {row['subset']} | {row['model']} | {row['rmse']:.2f} | {row['nasa_score']:.1f} |")
+    lines.append(
+        f"| {row['subset']} | {row['model']} | {row['rmse']:.2f} | {row['nasa_score']:.1f} |"
+    )
 path = ROOT / "reports" / "results.md"
 path.write_text("\n".join(lines) + "\n", encoding="utf-8")
 print(path)
