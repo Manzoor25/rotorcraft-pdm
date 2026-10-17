@@ -12,11 +12,17 @@
 
 ## Next
 
-- Register the trained bundles in Azure ML from a compute identity, because a laptop upload is blocked.
-- If registration succeeds, deploy one small endpoint, invoke it once, and delete it the same day.
+- Nothing further can be registered until the blocker below is cleared.
+- After that, deploy one `Standard_F2s_v2` endpoint, invoke it once, and delete it the same day.
 
 ## Blocker
 
-Laptop upload to `strotorpdm001` fails because the subscription forces public network access off. The error is that the request is blocked by the storage account network rules.
+Azure ML model registration is blocked on this subscription. I tried three times.
 
-To clear a laptop upload, I would need permission to enable public network access on `strotorpdm001`, or a private path from this machine. The next attempt does not need that permission: a short job on a workspace compute cluster, using that cluster's identity, can register the model that is already in the GitHub repo. That job spends a few cents of CPU. It is not done yet.
+1. A laptop upload to `strotorpdm001` is rejected because public network access is forced off.
+2. A compute job inside the managed virtual network, using the cluster identity, still failed. The model registry service lists blobs with an account key. The storage account returns `KeyBasedAuthenticationNotPermitted`.
+3. Switching the workspace to identity datastore auth did not change that registry call. A retry after the switch failed the same way. Job name: `placid_hamster_m8vywglps0`.
+
+What I need from you: a storage account that allows shared-key access for the Azure ML registry, or a policy exception on `strotorpdm001` that permits key authentication for the workspace service. I cannot grant that from this login. The trained files are in the GitHub repo under `models/`, so registration can be retried without retraining once storage auth allows it.
+
+The cluster `cpu-rotor` has a minimum of 0 nodes, so it should not keep billing after the failed jobs. No online endpoint was created for this project.
