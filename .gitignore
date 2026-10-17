@@ -11,7 +11,13 @@ __pycache__/
 data/raw/
 data/processed/
 models/*.joblib
+!models/rul_bundle.joblib
+!models/one_class_svm.joblib
+!models/isolation_forest.joblib
+!models/autoencoder.joblib
 models/*.pt
+!models/lstm.pt
+!models/cnn.pt
 mlflow.db
 mlruns/
 .ipynb_checkpoints/

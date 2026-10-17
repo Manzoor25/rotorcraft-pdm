@@ -21,7 +21,7 @@ from pydantic import BaseModel, Field
 
 from rotorcraft_pdm.models.decision import recommend_action
 from rotorcraft_pdm.monitoring import score_drift
-from rotorcraft_pdm.settings import MODEL_DIR, REPORTS_DIR
+from rotorcraft_pdm.settings import MODEL_DIR, REPORTS_DIR, RUL_CAP
 
 app = FastAPI(
     title="Rotorcraft predictive maintenance (proof of concept)",
@@ -99,7 +99,7 @@ def health():
 def predict_rul(request: RulRequest):
     bundle = _load_rul()
     frame, degraded = _vector_from_request(bundle, request)
-    point = float(np.clip(bundle["model"].predict(frame)[0], 0, None))
+    point = float(np.clip(bundle["model"].predict(frame)[0], 0, RUL_CAP))
     low = float(bundle["quantiles"]["low"].predict(frame)[0])
     high = float(bundle["quantiles"]["high"].predict(frame)[0])
     if low > high:

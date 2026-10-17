@@ -41,6 +41,9 @@ from sklearn.metrics import (
 # --------------------------------------------------------------
 def nasa_score(y_true, y_pred):
     error = np.asarray(y_pred, dtype=float) - np.asarray(y_true, dtype=float)
+    # exp overflows above about 700. A 200-cycle miss is already a disaster.
+    # Clipping the exponent input keeps the ranking and avoids inf.
+    error = np.clip(error, -200, 200)
     early = np.exp(-error / 13.0) - 1.0
     late = np.exp(error / 10.0) - 1.0
     penalty = np.where(error < 0, early, late)

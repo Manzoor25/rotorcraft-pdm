@@ -15,7 +15,7 @@
 
 import numpy as np
 
-from rotorcraft_pdm.settings import RANDOM_STATE
+from rotorcraft_pdm.settings import RANDOM_STATE, RUL_CAP
 
 
 # --------------------------------------------------------------
@@ -77,7 +77,7 @@ def predict_sequence(bundle, windows):
     with torch.no_grad():
         tensor = torch.tensor(windows, dtype=torch.float32)
         predicted = model(tensor).cpu().numpy().ravel()
-    return np.clip(predicted, 0, None)
+    return np.clip(predicted, 0, RUL_CAP)
 
 
 # --------------------------------------------------------------

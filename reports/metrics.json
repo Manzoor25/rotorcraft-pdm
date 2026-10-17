@@ -1,0 +1,208 @@
+{
+  "classical": [
+    {
+      "subset": "FD001",
+      "model": "linear_regression",
+      "rmse": 38.19699319814282,
+      "mae": 25.865329914593005,
+      "nasa_score": 43833.02707216055
+    },
+    {
+      "subset": "FD001",
+      "model": "random_forest",
+      "rmse": 21.327267028484783,
+      "mae": 15.074933805562512,
+      "nasa_score": 986.4158586225427
+    },
+    {
+      "subset": "FD001",
+      "model": "lightgbm",
+      "rmse": 23.769099354536877,
+      "mae": 16.327134740217556,
+      "nasa_score": 1449.831358574908
+    },
+    {
+      "subset": "FD001",
+      "model": "xgboost",
+      "rmse": 22.91295154319319,
+      "mae": 15.710102082490922,
+      "nasa_score": 1429.4631685833745
+    },
+    {
+      "subset": "FD002",
+      "model": "linear_regression",
+      "rmse": 38.395462711130754,
+      "mae": 24.59858897001075,
+      "nasa_score": 779032.6521344559
+    },
+    {
+      "subset": "FD002",
+      "model": "random_forest",
+      "rmse": 19.985415783345303,
+      "mae": 14.098910450372056,
+      "nasa_score": 9582.805041844233
+    },
+    {
+      "subset": "FD002",
+      "model": "lightgbm",
+      "rmse": 19.053572366349695,
+      "mae": 13.54999029256294,
+      "nasa_score": 10115.422259068371
+    },
+    {
+      "subset": "FD002",
+      "model": "xgboost",
+      "rmse": 19.943754605752634,
+      "mae": 13.877953324999128,
+      "nasa_score": 7674.740558909317
+    },
+    {
+      "subset": "FD003",
+      "model": "linear_regression",
+      "rmse": 31.05535737916652,
+      "mae": 21.18937870971279,
+      "nasa_score": 63073.99189325543
+    },
+    {
+      "subset": "FD003",
+      "model": "random_forest",
+      "rmse": 22.921089323754725,
+      "mae": 16.138725970092345,
+      "nasa_score": 2314.971717226491
+    },
+    {
+      "subset": "FD003",
+      "model": "lightgbm",
+      "rmse": 22.24579969996892,
+      "mae": 16.01794956779029,
+      "nasa_score": 1386.5390645308858
+    },
+    {
+      "subset": "FD003",
+      "model": "xgboost",
+      "rmse": 21.84813970858656,
+      "mae": 16.118127317428588,
+      "nasa_score": 1342.8396864534996
+    },
+    {
+      "subset": "FD004",
+      "model": "linear_regression",
+      "rmse": 28.115420194954265,
+      "mae": 19.902095789702017,
+      "nasa_score": 55376.82493346693
+    },
+    {
+      "subset": "FD004",
+      "model": "random_forest",
+      "rmse": 17.983448713352736,
+      "mae": 13.038035918319405,
+      "nasa_score": 1792.467121045956
+    },
+    {
+      "subset": "FD004",
+      "model": "lightgbm",
+      "rmse": 17.918538379651658,
+      "mae": 12.483098332476779,
+      "nasa_score": 1937.2488394782436
+    },
+    {
+      "subset": "FD004",
+      "model": "xgboost",
+      "rmse": 17.502892175767244,
+      "mae": 12.115882096752044,
+      "nasa_score": 1715.1477320021438
+    }
+  ],
+  "sequence": [
+    {
+      "subset": "FD001",
+      "model": "lstm",
+      "rmse": 59.410528074397156,
+      "mae": 48.825805814266204,
+      "nasa_score": 33094.15854413071
+    },
+    {
+      "subset": "FD001",
+      "model": "cnn",
+      "rmse": 39.680205293672515,
+      "mae": 28.01189606189728,
+      "nasa_score": 115304.0432425642
+    }
+  ],
+  "fd001_winner": "random_forest",
+  "interval_coverage_10_90": 0.84,
+  "optuna_lightgbm": {
+    "best_params": {
+      "num_leaves": 10,
+      "learning_rate": 0.13260289895074157
+    },
+    "best_nasa_score": 1165.8274644881556
+  },
+  "anomaly": {
+    "isolation_forest": {
+      "precision": 0.9066666666666666,
+      "recall": 0.6868686868686869,
+      "f1": 0.7816091954022989,
+      "roc_auc": 0.9121518212427303,
+      "pr_auc": 0.913584464112345,
+      "false_negatives": 93,
+      "support_positive": 297,
+      "threshold": 5.034763838479561e-18
+    },
+    "one_class_svm": {
+      "precision": 0.8551724137931035,
+      "recall": 0.835016835016835,
+      "f1": 0.8449744463373083,
+      "roc_auc": 0.9308800689272071,
+      "pr_auc": 0.9465055753263714,
+      "false_negatives": 49,
+      "support_positive": 297,
+      "threshold": 0.3353020910240699
+    },
+    "autoencoder": {
+      "precision": 0.9095022624434389,
+      "recall": 0.6767676767676768,
+      "f1": 0.7760617760617761,
+      "roc_auc": 0.9130247480415831,
+      "pr_auc": 0.921647882645705,
+      "false_negatives": 96,
+      "support_positive": 297,
+      "threshold": 3.795677661895752
+    }
+  },
+  "fleet": {
+    "aircraft": 12,
+    "fixed_interval": 80,
+    "fixed_unplanned_failures": 6,
+    "model_unplanned_failures": 3,
+    "model_early_pulls": 8,
+    "availability_fixed": 0.5,
+    "availability_model": 0.75
+  },
+  "sample_action": {
+    "action": "inspect",
+    "lower_bound_cycles": 119.4771780216624,
+    "point_cycles": 122.83272312864644,
+    "reason": "Cautious remaining life is 119 cycles (central guess 123). Continue, and inspect on the normal cycle.",
+    "disclaimer": "Decision support only. Not an airworthiness release."
+  },
+  "dropped_sensors": {
+    "FD001": [
+      "sensor_1",
+      "sensor_5",
+      "sensor_10",
+      "sensor_16",
+      "sensor_18",
+      "sensor_19"
+    ],
+    "FD002": [],
+    "FD003": [
+      "sensor_1",
+      "sensor_5",
+      "sensor_16",
+      "sensor_18",
+      "sensor_19"
+    ],
+    "FD004": []
+  }
+}

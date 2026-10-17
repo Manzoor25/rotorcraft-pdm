@@ -60,6 +60,7 @@ from rotorcraft_pdm.settings import (
     MODEL_DIR,
     PROJECT_ROOT,
     REPORTS_DIR,
+    RUL_CAP,
     SEQUENCE_LENGTH,
 )
 from rotorcraft_pdm.simulation.fleet import simulate_fleet
@@ -105,7 +106,7 @@ def train_classical(subset, small=False):
     fitted = {}
     for name, model in build_point_models(small=small).items():
         model.fit(x_train, y_train)
-        predicted = np.clip(model.predict(x_exam), 0, None)
+        predicted = np.clip(model.predict(x_exam), 0, RUL_CAP)
         scores = rul_metrics(y_exam, predicted)
         rows.append({"subset": subset, "model": name, **scores})
         fitted[name] = model
@@ -144,7 +145,7 @@ def tune_lightgbm(bundle, n_trials=8):
             verbose=-1,
         )
         model.fit(bundle["x_train"], bundle["y_train"])
-        predicted = np.clip(model.predict(bundle["x_exam"]), 0, None)
+        predicted = np.clip(model.predict(bundle["x_exam"]), 0, RUL_CAP)
         return rul_metrics(bundle["y_exam"], predicted)["nasa_score"]
 
     study = optuna.create_study(direction="minimize", sampler=optuna.samplers.TPESampler(seed=42))
@@ -173,7 +174,7 @@ def main():
     quantiles = fit_quantile_models(fd001["x_train"], fd001["y_train"])
     low = quantiles["low"].predict(fd001["x_exam"])
     high = quantiles["high"].predict(fd001["x_exam"])
-    point = np.clip(fd001["fitted"][winner_name].predict(fd001["x_exam"]), 0, None)
+    point = np.clip(fd001["fitted"][winner_name].predict(fd001["x_exam"]), 0, RUL_CAP)
     coverage = interval_coverage(fd001["y_exam"], low, high)
 
     tuned = tune_lightgbm(fd001, n_trials=8)

@@ -1,0 +1,13 @@
+tail,source_engine,hidden_rul,cautious_rul,fixed_interval_failure,model_unplanned_failure,model_pulls_early,action
+POC-01,41,18.0,28.481400602184312,True,True,False,schedule_maintenance
+POC-02,9,111.0,80.68167223654315,False,False,False,inspect
+POC-03,70,94.0,47.20886382786624,False,False,True,schedule_maintenance
+POC-04,53,26.0,30.229547427304503,True,True,False,schedule_maintenance
+POC-05,60,100.0,48.50270211051322,False,False,True,schedule_maintenance
+POC-06,81,8.0,1.624298955082198,True,False,True,ground
+POC-07,8,95.0,31.84729968798502,False,False,True,schedule_maintenance
+POC-08,93,85.0,15.252264365970133,False,False,True,schedule_maintenance
+POC-09,10,96.0,64.77246537091897,False,False,True,schedule_maintenance
+POC-10,67,77.0,94.4084902336868,True,True,False,inspect
+POC-11,98,59.0,30.208040574035373,True,False,True,schedule_maintenance
+POC-12,20,16.0,1.416072185653015,True,False,True,ground

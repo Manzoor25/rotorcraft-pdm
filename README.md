@@ -49,7 +49,22 @@ flowchart LR
 
 ## Results
 
-The numbers in [reports/results.md](reports/results.md) are written by `scripts/train.py`. If that file is missing, the training run has not been committed yet. The NASA score is the selection metric. It penalizes late remaining-life calls more than early ones. See [EVALUATION.md](EVALUATION.md).
+FD001 last-cycle exam. The winner is the lowest NASA score. Lower is better. Late remaining-life calls are penalized more than early ones.
+
+| Model | RMSE | MAE | NASA score |
+| --- | ---: | ---: | ---: |
+| linear_regression | 38.20 | 25.87 | 43833.0 |
+| random_forest (selected) | 21.33 | 15.07 | 986.4 |
+| lightgbm | 23.77 | 16.33 | 1449.8 |
+| xgboost | 22.91 | 15.71 | 1429.5 |
+| lstm | 59.41 | 48.83 | 33094.2 |
+| cnn | 39.68 | 28.01 | 115304.0 |
+
+The 10th-to-90th percentile interval covered 84% of the FD001 truths. A nominal 80% interval would cover 80%. The vibration model that missed the fewest abnormal Airbus traces was the one-class SVM: 49 misses out of 297, F1 0.85. The autoencoder missed 96. On a 12-aircraft simulation, a fixed 80-cycle pull had 6 unplanned failures. The cautious-bound policy had 3, and it pulled early 8 times.
+
+Full tables: [reports/results.md](reports/results.md) and [EVALUATION.md](EVALUATION.md).
+
+![Remaining life cap](docs/rul_cap.png)
 
 ## Run it
 
