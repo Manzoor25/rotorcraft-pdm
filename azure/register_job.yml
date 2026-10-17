@@ -1,0 +1,13 @@
+# Registers models that are already in the GitHub repo.
+# Runs on workspace compute so the identity can reach private storage.
+$schema: https://azuremlschemas.azureedge.net/latest/commandJob.schema.json
+type: command
+display_name: register-rotorcraft-models
+experiment_name: rotorcraft-pdm
+compute: azureml:cpu-rotor
+command: >-
+  python -c "import urllib.request, zipfile; urllib.request.urlretrieve('https://github.com/Manzoor25/rotorcraft-pdm/archive/refs/heads/main.zip', 'src.zip'); zipfile.ZipFile('src.zip').extractall('.')" &&
+  cd rotorcraft-pdm-main &&
+  pip install azure-ai-ml azure-identity &&
+  python scripts/register_in_azure.py
+environment: azureml://registries/azureml/environments/sklearn-1.5/labels/latest
